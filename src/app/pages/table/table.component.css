@@ -1,0 +1,23 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+}
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+.grid .wrapper {
+    height: 100px;
+    max-width: 300px; /* largura máxima dos boxes*/
+    overflow: hidden;
+    flex-grow: 1;
+}
+.grid .wrapper img {
+    height: 100%;
+    margin: 0.4em 0.4em;
+    object-fit: cover;
+    width: 100%;
+}
