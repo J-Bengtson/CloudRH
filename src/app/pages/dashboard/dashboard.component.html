@@ -5,10 +5,22 @@
         <div class="row">
           <div class="col-5 col-md-4">
             <div class="icon-big text-center icon-warning">
-             
+             <button mat-mini-fab>
+              <a (click)="onRedirectUser()">
                <mat-icon> 
-                  account_box   </mat-icon>
-             
+                  account_box   
+                </mat-icon>
+              </a>
+            </button>
+<button mat-mini-fab>
+  <a (click)="onLogout()">
+    <mat-icon> 
+      exit_to_app   
+    </mat-icon>
+  </a>
+</button>
+
+                  
                 
             </div>
           </div>

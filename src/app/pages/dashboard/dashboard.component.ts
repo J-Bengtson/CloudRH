@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import Chart from 'chart.js';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { UserCurrentService } from 'app/user-current.service';
-
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'dashboard-cmp',
@@ -13,9 +12,16 @@ import { UserCurrentService } from 'app/user-current.service';
 export class DashboardComponent implements OnInit{
 
   constructor(
-    public userCurrentService: UserCurrentService
-  ){
+    public userCurrentService: UserCurrentService,
+    public router: Router
+  ){}
 
+  onLogout(){
+    this.router.navigate(['login']);
+  }
+
+  onRedirectUser(){
+    this.router.navigate(['user']);
   }
 
   public canvas : any;

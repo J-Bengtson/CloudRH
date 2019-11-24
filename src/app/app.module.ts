@@ -17,7 +17,7 @@ import { routing }        from './app.routing';
 import { AuthGuard } from './_guards';
 import { AlertService, AuthenticationService, UserService } from './_services';
 import { LoginComponent } from './login';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register';
 import { BrowserModule } from '@angular/platform-browser';
 import { fakeBackendProvider, ErrorInterceptor, JwtInterceptor } from './_helpers';
@@ -30,11 +30,26 @@ import {
   MatInputModule,
   MatButtonModule,
   MatFormFieldModule,
-  MatDividerModule
+  MatDividerModule,
 } from '@angular/material';
-import { CompanyService } from './_services/company.service';
 import { UserCurrentService } from './user-current.service';
 
+import { FirebaseService } from './_services/firebase.service';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFirestoreModule} from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+
+var firebaseConfig = {
+  apiKey: "AIzaSyCtfCEx4vUMOiB6RkmSge8KtLaB8JMD3Qg",
+  authDomain: "fir-fumec.firebaseapp.com",
+  databaseURL: "https://fir-fumec.firebaseio.com",
+  projectId: "fir-fumec",
+  storageBucket: "fir-fumec.appspot.com",
+  messagingSenderId: "438980144068",
+  appId: "1:438980144068:web:07174cf297548d9b469291",
+  measurementId: "G-3ZFE0XRYYZ"
+};
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -56,6 +71,7 @@ export function tokenGetter() {
     RouterModule.forRoot(AppRoutes,{
       useHash: true
     }),
+    FormsModule,
     SidebarModule,
     NavbarModule,
     ToastrModule.forRoot(),
@@ -68,6 +84,13 @@ export function tokenGetter() {
     MatButtonModule,
     MatInputModule, 
     MatDividerModule,
+
+    // modules firebase
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+
+    AngularFirestoreModule,
+    AngularFireStorageModule,
 
 
     JwtModule.forRoot({
@@ -91,8 +114,8 @@ export function tokenGetter() {
     fakeBackendProvider,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    CompanyService,
-    UserCurrentService 
+    UserCurrentService ,
+    FirebaseService
 
   ],
   bootstrap: [AppComponent]

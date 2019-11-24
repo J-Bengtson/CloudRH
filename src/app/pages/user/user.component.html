@@ -13,7 +13,7 @@
           <p class="description">
             @tonystark
           </p>
-          <mat-card>Simple card</mat-card>
+     
         </div>
         <p class="description text-center">
           "Gênio, bilionário,
@@ -34,65 +34,33 @@
         <h5 class="card-title">Editar Perfil</h5>
       </div>
       <div class="card-body">
-        <form>
-          <div class="row">
-              <mat-slider min="1" max="100" step="1" value="1"></mat-slider>
-              <div class="col-md-6 pr-1">
-                  <div class="form-group">
-                    <label>Nome</label>
-                    <input type="text" class="form-control" placeholder="Company" value="Tony Stark">
-                  </div>
-                </div>
-                <div class="col-md-6 pl-1">
-                  <div class="form-group">
-                    <label>E-mail</label>
-                    <input type="text" class="form-control" placeholder="Last Name" value="tonybilionario@gmail.com">
-                  </div>
-                </div>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+              <label for="username">Nome :</label>
+              <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+              <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                  <div *ngIf="f.username.errors.required">Campo Obrigatorio</div>
+              </div>
           </div>
-       
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label>Endereço</label>
-                <input type="text" class="form-control" placeholder="Home Address" value="Melbourne, Australia">
+          <div class="form-group">
+              <label for="password">Password :</label>                    
+              <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+              <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                  <div *ngIf="f.password.errors.required">Campo Obrigatorio</div>
               </div>
-            </div>
           </div>
-          <div class="row">
-            <div class="col-md-4 pr-1">
-              <div class="form-group">
-                <label>Cidade</label>
-                <input type="text" class="form-control" placeholder="City" value="Melbourne">
-              </div>
-            </div>
-            <div class="col-md-4 px-1">
-              <div class="form-group">
-                <label>Estado</label>
-                <input type="text" class="form-control" placeholder="Country" value="Australia">
-              </div>
-            </div>
-            <div class="col-md-4 pl-1">
-              <div class="form-group">
-                <label>Cep</label>
-                <input type="number" class="form-control" placeholder="56545-85">
-              </div>
-            </div>
+          <div class="form-group">
+              <button [disabled]="loading" class="btn btn-primary">Login</button>
+              <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+              <a [routerLink]="['/register']" class="btn btn-link">Register</a>
+              <br>
           </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label>Descrição</label>
-                <textarea class="form-control textarea">Gênio, bilionário, Playboy, Filantropo</textarea>
-              </div>
-            </div>
-           
-          </div>
-          <a routerLink="./"class="btn btn-success">Salvar</a>
+      
+          <
+          <a class="btn btn-success" (click)="create()">Salvar</a>
           <a routerLink="./"class="btn btn-danger">Cancelar</a>
-
         </form>
       </div>
     </div>
-  </div>
-</div>
+    </div>
+    </div>
