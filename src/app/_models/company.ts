@@ -1,6 +1,6 @@
-import {Contato , Endereco} from '.';
+import {Contato , Endereco, User, Vaga} from '.';
 
-export class Company {
-    name : string;
-    lastName : string;
+export class Company extends User{
+    cnpj : string;
+    descricao : string;
 }

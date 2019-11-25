@@ -6,6 +6,7 @@ import { first } from 'rxjs/operators';
 import { AlertService, AuthenticationService } from '../_services';
 import Swal from 'sweetalert2'
 import { CssSelector } from '@angular/compiler';
+import { FirebaseService } from 'app/_services/firebase.service';
 
 @Component(
     {templateUrl: 'login.component.html',
@@ -53,7 +54,8 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService,
-        private alertService: AlertService) {}
+        private alertService: AlertService,
+        private firebaseService: FirebaseService) {}
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
@@ -84,6 +86,9 @@ export class LoginComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 data => {
+                  console.log("username value:");
+                    console.log(this.f.username.value);
+                    this.firebaseService.login(this.f.username.value);
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',

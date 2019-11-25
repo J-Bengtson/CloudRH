@@ -36,17 +36,17 @@
       <div class="card-body">
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
-              <label for="username">Nome :</label>
-              <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-              <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                  <div *ngIf="f.username.errors.required">Campo Obrigatorio</div>
+              <label for="data">Escreva  :</label>
+              <input type="textarea" formControlName="data" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.data.errors }" />
+              <div *ngIf="submitted && f.data.errors" class="invalid-feedback">
+                  <div *ngIf="f.data.errors.required">Campo Obrigatorio</div>
               </div>
           </div>
           <div class="form-group">
-              <label for="password">Password :</label>                    
-              <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-              <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                  <div *ngIf="f.password.errors.required">Campo Obrigatorio</div>
+              <label for="area">Profissão (area) :</label>                    
+              <input type="text" formControlName="area" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.area.errors }" />
+              <div *ngIf="submitted && f.area.errors" class="invalid-feedback">
+                  <div *ngIf="f.password.area.required">Campo Obrigatorio</div>
               </div>
           </div>
           <div class="form-group">
@@ -56,8 +56,8 @@
               <br>
           </div>
       
-          <
-          <a class="btn btn-success" (click)="create()">Salvar</a>
+          
+          <a class="btn btn-success" (click)="click()">Salvar</a>
           <a routerLink="./"class="btn btn-danger">Cancelar</a>
         </form>
       </div>

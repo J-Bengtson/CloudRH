@@ -52,21 +52,20 @@
          <table class="table table-striped table-hover">   
              <thead>
                  <tr>
-                   <th>Local</th>
-                   <th>Saída</th>
-                   <th>Chegada</th>
-                   <th>Data</th>
-                   <th>Opções</th>
+                   <th>Nome</th>
+                   <th>Cargo/Profissão</th>
+                   <th>Descrição</th>
+                   <th>Inscreve-se</th>
+                   
                  </tr>
              </thead>
              <tbody>  
-               <tr>
-                   <td>Aeroporto do Galeão</td>
-                   <td>Rio de Janeiro às 09:50</td>
-                   <td>Fortaleza às 02:39</td>
-                   <td>15/11/2019</td>
+               <tr *ngFor="let x of data">
+                   <td>{{x.nome}}</td>
+                   <td> {{x.area}} </td>
+                   <td> {{x.data}} </td>
                    <td>
-                    <button class="btn btn-success">
+                    <button class="btn btn-success" (click)="alterar(x)">
                       Alterar
                     </button>
                     &nbsp;
@@ -77,38 +76,9 @@
                    
                    
 
-                    </tr>
-               <tr>
-                  <td>Internacional Liberty</td>
-                  <td>Newark às 01:50</td>
-                  <td>Fortaleza às 07:39</td>
-                  <td>10/07/2019</td>
-                  <td>
-                    <button class="btn btn-success">
-                      Alterar
-                    </button>
-                    &nbsp;
-                    <button  class="btn btn-danger">
-                      Excluir
-                    </button>
-                     </td>
-    
-            </tr>
-            <tr>
-                <td>Internacional de Atlanta</td>
-                <td>Atlanta às 16:50</td>
-                <td>Dallas às 23:39</td>
-                <td>01/04/2018</td>
-                <td>
-                <button class="btn btn-success">
-                  Alterar
-                </button>
-                &nbsp;
-                <button  class="btn btn-danger">
-                  Excluir
-                </button>
-                 </td>
-          </tr>
+                  </tr>
+              
+            
              </tbody>
          </table>
      </div>

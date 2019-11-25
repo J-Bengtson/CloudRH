@@ -1,4 +1,5 @@
 export class User {
+    tipo: number;
     id: number;
     username: string;
     password: string;
