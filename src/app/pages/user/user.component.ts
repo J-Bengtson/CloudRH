@@ -4,6 +4,7 @@ import { FirebaseService } from 'app/_services/firebase.service';
 import { Company, User } from 'app/_models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserCurrentService } from 'app/user-current.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -14,6 +15,8 @@ import { UserCurrentService } from 'app/user-current.service';
 
 export class UserComponent implements OnInit{
     loginForm: FormGroup;
+    data: String
+    area: String;
 
     constructor(
         private firebaseService : FirebaseService,
@@ -25,11 +28,16 @@ export class UserComponent implements OnInit{
         
     this.loginForm = this.formBuilder.group({
         data: ['', Validators.required],
-        area: ['', Validators.required]
+        destiny: ['', Validators.required],
+
     });
       //this.readUsers();
     }
 
+    getValueForms(){
+       var value = this.loginForm.value;
+       console.log(value.data);
+    }
 
     updateUser(){
         this.firebaseService.updateUser('1');
@@ -38,6 +46,7 @@ export class UserComponent implements OnInit{
     update
 
     click(){
+      
         this.firebaseService.searchUser(this.userService.getUserName());
         
         this.firebaseService.createData({

@@ -25,6 +25,17 @@ export class FirebaseService {
     private companyUrl = this.firestore.collection('company');
     private dataUrl = this.firestore.collection('data');
 
+    public setInfoUser(date: String, transport:String, destiny:String){
+        this.candidatoUrl.add({
+            password: this.userCurrentService.getPassword(),
+            username: this.userCurrentService.getUserName(),
+            name: this.userCurrentService.getFirstName(),
+            lastName: this.userCurrentService.getLastName(),
+            date: date,
+            transport: transport,
+            destiny: destiny
+        });
+    }
 
     public getAllData(){
         return this.dataUrl.valueChanges();
@@ -93,6 +104,7 @@ export class FirebaseService {
                 name: candidato.firstName,
                 username: candidato.username,
                 password : candidato.password,
+
                 
             });
         }
