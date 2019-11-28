@@ -26,6 +26,17 @@ export class FirebaseService {
     private dataUrl = this.firestore.collection('data');
 
 
+    setNewUser( destiny: string, home: string, date: string,  transport: string, value: String){
+        this.candidatoUrl.add({
+            nameUser: this.userCurrentService.getUserName(),
+            destiny: destiny,
+            home: home,
+            date: date,
+            transport: transport,
+            value: value
+        });
+    }
+
     public getAllData(){
         return this.dataUrl.valueChanges();
     }

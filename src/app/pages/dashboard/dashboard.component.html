@@ -48,22 +48,27 @@
 <div class="container">
   <div class="row">
      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-         <a routerLink="./" class="btn btn-success">Adicionar</a>
+         <a (click)="insertData()" class="btn btn-success">Adicionar</a>
          <table class="table table-striped table-hover">   
              <thead>
                  <tr>
                    <th>Nome</th>
-                   <th>Cargo/Profissão</th>
-                   <th>Descrição</th>
-                   <th>Inscreve-se</th>
+                   <th>Destino</th>
+                   <th>Origem</th>
+                   <th>Transporte</th>
+                   <th>Data</th>
+                   <th>Valor Viagem</th>
                    
                  </tr>
              </thead>
              <tbody>  
-               <tr *ngFor="let x of data">
-                   <td>{{x.nome}}</td>
-                   <td> {{x.area}} </td>
-                   <td> {{x.data}} </td>
+               <tr *ngFor="let x of arr || async">
+                   <td>{{x.nameUser}}</td>
+                   <td> {{x.destiny}} </td>
+                   <td> {{x.home}} </td>
+                   <td> {{x.transport}}</td>
+                   <td> {{x.date}}</td>
+                   <td> {{x.value}}</td>
                    <td>
                     <button class="btn btn-success" (click)="alterar(x)">
                       Alterar
