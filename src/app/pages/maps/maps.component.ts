@@ -12,7 +12,7 @@ export class MapsComponent implements OnInit {
     ngOnInit() {
         const myPosition = this.getCurrentUserLocation();
         console.log(myPosition);
-        var myLatlng = new google.maps.LatLng(myPosition.coords.latitude, myPosition.coords.longitude);
+        var myLatlng = new google.maps.LatLng(11, 11);
         var mapOptions = {
           zoom: 13,
           center: myLatlng,

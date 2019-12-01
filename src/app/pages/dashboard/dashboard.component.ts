@@ -12,9 +12,9 @@ import { MAT_BOTTOM_SHEET_DATA } from '@angular/material';
 
 
 @Component({
-    selector: 'dashboard-cmp',
-    moduleId: module.id,
-    templateUrl: 'dashboard.component.html'
+  selector: 'dashboard-cmp',
+  moduleId: module.id,
+  templateUrl: 'dashboard.component.html'
 })
 
 
@@ -22,11 +22,9 @@ import { MAT_BOTTOM_SHEET_DATA } from '@angular/material';
 
 
 
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit {
 
-  public async insertData(){
-    
-
+  public async insertData() {
     const { value: home } = await Swal.fire({
       title: 'ETAPA 1',
       text: 'De onde?',
@@ -37,12 +35,10 @@ export class DashboardComponent implements OnInit{
       },
       showCancelButton: true
     })
-    
     if (home) {
       Swal.fire(home)
       console.log(home);
     }
-
     const { value: destiny } = await Swal.fire({
       title: 'ETAPA 2',
       text: 'Para Onde?',
@@ -53,12 +49,10 @@ export class DashboardComponent implements OnInit{
       },
       showCancelButton: true
     })
-    
     if (destiny) {
       Swal.fire(destiny)
       console.log(destiny);
     }
-
     const { value: date } = await Swal.fire({
       title: 'ETAPA 3',
       text: 'Data (DD/MM/AA)',
@@ -69,16 +63,11 @@ export class DashboardComponent implements OnInit{
       },
       showCancelButton: true
     })
-    
     if (date) {
       Swal.fire(date)
       console.log(date);
     }
-    
-
-
     const { value: transport } = await Swal.fire({
-
       title: 'ETAPA 4',
       input: 'select',
       inputOptions: {
@@ -101,192 +90,182 @@ export class DashboardComponent implements OnInit{
       }
     })
 
+    if (transport == '' || date == '' || destiny == '' || home == '' ||
+      transport == null || date == null || destiny == null || home == null) {
 
-    if(transport == ''|| date  == '' || destiny == '' || home == '' ||
-    transport == null|| date  == null || destiny == null || home == null){
-      
-        Swal.fire({
-          icon: 'error',
-          title: 'Campo(s) Invalido(s)',
-          text: 'Preencha Todos Os Campos Corretamente'
-        })
-      return 
+      Swal.fire({
+        icon: 'error',
+        title: 'Campo(s) Invalido(s)',
+        text: 'Preencha Todos Os Campos Corretamente'
+      })
+      return
     }
 
-     
-let timerInterval
-Swal.fire({
-  title: 'Calculando preço da rota',
-  html: 'Pode demorar alguns segundos.',
-  timer: 2000,
-  timerProgressBar: true,
-  onBeforeOpen: () => {
-    Swal.showLoading()
-    timerInterval = setInterval(() => {
-    }, 1000)
-  },
-  onClose: () => {
-    clearInterval(timerInterval)
-  }
-}).then((result) => {
-  if (
-   
-    result.dismiss === Swal.DismissReason.timer
-  ) {
-    this.arr = new Array();
-    var random = this.calculateRandom();
+
+    let timerInterval
     Swal.fire({
-      title: 'Valor da sua viagem',
-      text: 'R$' + random + '',
-      
-      showClass: {
-        popup: 'animated fadeInDown faster'
+      title: 'Calculando preço da rota',
+      html: 'Pode demorar alguns segundos.',
+      timer: 2000,
+      timerProgressBar: true,
+      onBeforeOpen: () => {
+        Swal.showLoading()
+        timerInterval = setInterval(() => {
+        }, 1000)
       },
-      hideClass: {
-        popup: 'animated fadeOutUp faster'
+      onClose: () => {
+        clearInterval(timerInterval)
+      }
+    }).then((result) => {
+      if (
+
+        result.dismiss === Swal.DismissReason.timer
+      ) {
+        this.arr = new Array();
+        var random = this.calculateRandom();
+        Swal.fire({
+          title: 'Valor da sua viagem',
+          text: 'R$' + random + '',
+
+          showClass: {
+            popup: 'animated fadeInDown faster'
+          },
+          hideClass: {
+            popup: 'animated fadeOutUp faster'
+          }
+        })
+        this.firebaseService.setNewUser(destiny, home, date, transport, random);
       }
     })
-    this.firebaseService.setNewUser(destiny, home, date, transport, random);
-
   }
-})
 
+  update(x){
+    console.log(x);
+  }
 
+  delete(x){
+    
+    this.firebaseService.deleteNewUser(x).then(
+      e => {
+        console.log(e);
+      }
+    )
+     
 
+      
+    
   }
 
   constructor(
     public userCurrentService: UserCurrentService,
     public router: Router,
-    public firebaseService: FirebaseService 
-  ){}
+    public firebaseService: FirebaseService
+  ) { }
 
-  onLogout(){
+  onLogout() {
     this.router.navigate(['login']);
   }
 
-  onRedirectUser(){
+  onRedirectUser() {
     this.router.navigate(['user']);
   }
 
-  public canvas : any;
+  public canvas: any;
   public ctx;
   public chartColor;
   public chartEmail;
   public chartHours;
 
   public user: any;
-  public company :Array<any> = new Array<any>();
+  public company: Array<any> = new Array<any>();
   public candidate: Array<any> = new Array<any>();
   public data: Array<any> = new Array<any>();
-  
 
-  /**
-   * getUserCurrent
-   */
- 
-    ngOnInit(){
-      const user = this.userCurrentService.getCurrentUser();
-      
-      this.SearchMe(user.username);
 
-      
-
-    }
+  ngOnInit() {
+    const user = this.userCurrentService.getCurrentUser();
+    this.SearchMe(user.username);
+  }
 
 
   ///////////////////////////////////////////////////////
-    public getAllData(){
-      this.firebaseService.getAllData().subscribe(
-        data => {
-          console.log((data as Data[]));
-          (data as Data[]).map( e =>{
-            this.data.push(e);
-          })
-        }
-      );
-    }
+  public getAllData() {
+    this.firebaseService.getAllData().subscribe(
+      data => {
+        console.log((data as Data[]));
+        (data as Data[]).map(e => {
+          this.data.push(e);
+        })
+      }
+    );
+  }
 
-    arr: UserFace[];
-    SearchMe(myUserName: string){
-      this.arr = new Array();
-      console.log(this.arr);
-      this.firebaseService.getAllCandidato().subscribe(
-        data => {
-         data.map( e => {
-           var value = e as UserFace;
-          if(value.nameUser == this.userCurrentService.getUserName())
+  arr: UserFace[];
+  SearchMe(myUserName: string) {
+    this.arr = new Array();
+    console.log(this.arr);
+    this.firebaseService.getAllCandidato().subscribe(
+      data => {
+        data.map(e => {
+          var value = e as UserFace;
+          if (value.nameUser == this.userCurrentService.getUserName())
             this.arr.push(value);
-          
+        })
+      }
+    )
+    console.log(this.arr);
+  }
 
-       
-             
+  redirectCost(){
+    this.router.navigate(['/gastos'])
+  }
 
-         })
-          
-        }   
-      )
+  calculateRandom(): any {
+    const random = Math.floor(Math.random() * 241);
+    const random2 = Math.floor(Math.random() * 101);
+    console.log(random + '.' + random2);
+    return random + '.' + random2;
 
-      console.log(this.arr);
-    }
+  }
+  ////////////////////////////////////////////////////////////////////////
+  public getAllCompanies() {
+    this.firebaseService.getAllCompany().subscribe(
+      data => {
+        console.log((data as Company[]));
+        this.company = new Array<any>();
+        (data as Company[]).map(e => {
+          this.company.push(e);
+        });
+        //this.allCompanies.push(data);
+        //console.log(this.allCompanies);
+      }
+    )
+  }
 
+  public getAllCandidates() {
+    this.firebaseService.getAllCandidato().subscribe(
+      data => {
+        console.log((data as Candidato[]));
+        this.candidate = new Array<any>();
+        (data as Candidato[]).map(e => {
+          this.candidate.push(e);
+        })
+      }
+    )
+  }
 
-    calculateRandom(): any{
-    const random = Math.floor(Math.random() * 241 ) ;
-    const random2 = Math.floor(Math.random() * 101 ) ;
-    console.log( random + '.'+ random2);
-    return random + '.'+ random2;
-   
-    }
-    
-
-
-
-
-
-    ////////////////////////////////////////////////////////////////////////
-    public getAllCompanies(){
-      this.firebaseService.getAllCompany().subscribe(
-        data => {
-          console.log((data as Company[]));
-          this.company = new Array<any>();
-          (data as Company[]).map( e =>{
-            this.company.push(e);
-          });
-          //this.allCompanies.push(data);
-          //console.log(this.allCompanies);
-        }
-      )
-    }
-
-    public getAllCandidates(){
-      this.firebaseService.getAllCandidato().subscribe(
-        data =>{
-          console.log((data as Candidato[]));
-          this.candidate = new Array<any>();
-          (data as Candidato[]).map( e=> {
-            this.candidate.push(e);
-          })
-        }
-      )
-    }
-
-    alterar( company ){
-      console.log("alterar");
-      console.log(company);
-      console.log(company.name);
-    }
+  alterar(company) {
+    console.log("alterar");
+    console.log(company);
+    console.log(company.name);
+  }
 }
 
-
-
-
-
-interface UserFace{
+interface UserFace {
   date: string
-destiny: string
-home: string
-nameUser: string
-transport: string,
-value: string
+  destiny: string
+  home: string
+  nameUser: string
+  transport: string,
+  value: string
 }

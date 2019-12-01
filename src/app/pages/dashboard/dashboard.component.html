@@ -1,92 +1,114 @@
-<div class="col-lg-3 col-md-6 col-sm-6">
-    <div class="card card-stats">
-      <div class="card-body ">
-
-        <div class="row">
-          <div class="col-5 col-md-4">
-            <div class="icon-big text-center icon-warning">
-             <button mat-mini-fab>
+<div class="col-lg-12 col-md-12 col-sm-12">
+  <div class="card card-stats">
+    <div class="card-body ">
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <mat-card>
+            <mat-card-title>BEM-VINDO: {{   userCurrentService.getFirstName()  }}
+              {{ userCurrentService.getCurrentUser().lastName }}</mat-card-title>
+          </mat-card>
+          <div class="icon-big text-center icon-warning">
+            <button mat-mini-fab>
               <a (click)="onRedirectUser()">
-               <mat-icon> 
-                  account_box   
+                <mat-icon>
+                  account_box
                 </mat-icon>
               </a>
             </button>
-<button mat-mini-fab>
-  <a (click)="onLogout()">
-    <mat-icon> 
-      exit_to_app   
-    </mat-icon>
-  </a>
-</button>
-
-                  
-                
-            </div>
-          </div>
-          <div class="col-7 col-md-8">
-            <div class="numbers">
-                <p class="card-title-d"> Bem vindo,
-                    <p>
-              <p class="card-category"> {{ userCurrentService.getFirstName() }} {{ userCurrentService.getCurrentUser().lastName }} </p>
-
-                <p>
-            </div>
+            <button mat-mini-fab>
+              <a (click)="onLogout()">
+                <mat-icon>
+                  exit_to_app
+                </mat-icon>
+              </a>
+            </button>
           </div>
         </div>
-      </div>
-
-
-      <div class="card-footer ">
-        <hr>
-        <div class="stats">
-
+        <div class="col-7 col-md-8">
+          <div class="numbers">
+            <p class="card-title-d"> Bem vindo,
+              <p>
+                <p class="card-category"> {{ userCurrentService.getFirstName() }}
+                  {{ userCurrentService.getCurrentUser().lastName }} </p>
+                <p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-<div class="container">
-  <div class="row">
-     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-         <a (click)="insertData()" class="btn btn-success">Adicionar</a>
-         <table class="table table-striped table-hover">   
-             <thead>
-                 <tr>
-                   <th>Nome</th>
-                   <th>Destino</th>
-                   <th>Origem</th>
-                   <th>Transporte</th>
-                   <th>Data</th>
-                   <th>Valor Viagem</th>
-                   
-                 </tr>
-             </thead>
-             <tbody>  
-               <tr *ngFor="let x of arr || async">
-                   <td>{{x.nameUser}}</td>
-                   <td> {{x.destiny}} </td>
-                   <td> {{x.home}} </td>
-                   <td> {{x.transport}}</td>
-                   <td> {{x.date}}</td>
-                   <td> {{x.value}}</td>
-                   <td>
-                    <button class="btn btn-success" (click)="alterar(x)">
-                      Alterar
-                    </button>
-                    &nbsp;
-                    <button  class="btn btn-danger">
-                      Excluir
-                    </button>
-                     </td>
-                   
-                   
-
-                  </tr>
-              
-            
-             </tbody>
-         </table>
-     </div>
+    <div class="card-footer ">
+      <hr>
+      <div class="stats">
+      </div>
+    </div>
   </div>
 </div>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      <h1> Viagens </h1>
+      <div class="alert alert-info" role="alert">
+          Selecione 
+        </div>
+      <br>
+      <div class="row">
+        <div class=" col-1 col-sm-1">
+        </div>
+        <button type="button" (click)="redirectC" class="order-1 order-sm-2 btn btn-success col-12 col-sm-5"> Analisar Gastos/Saldo
+        </button>
+        <button type="button" (click)="insertData()" class="order-2 order-sm-1 btn btn-warning col-12 col-sm-5">Marcar
+          Viagem </button>
+      </div>
+      <br>
+      <br>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Destino</th>
+            <th>Origem</th>
+            <th>Transporte</th>
+            <th>Data</th>
+            <th>Valor Viagem (R$)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let x of arr || async">
+            <td> {{x.destiny}} </td>
+            <td> {{x.home}} </td>
+            <td align="center"> 
+              
+                <div *ngIf="x.transport === 'bus'">
+                    <mat-icon> directions_bus </mat-icon>
+                </div>
 
+                <div *ngIf="x.transport === 'airplane'">
+                    <mat-icon> flight </mat-icon>
+                </div>
+
+                <div *ngIf="x.transport === 'car'">
+                    <mat-icon> directions_cars </mat-icon>
+                </div>
+
+
+            </td>
+            
+
+            
+            <td> {{x.date}}</td>
+            <td style="color:red">
+              <p style="color:black">R$</p> {{x.value}}
+            </td>
+            <td>
+              <button class="btn btn-success" (click)="update(x)">
+                Alterar
+              </button>
+              &nbsp;
+              <button class="btn btn-danger" (click)="delete(x)">
+                Excluir
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

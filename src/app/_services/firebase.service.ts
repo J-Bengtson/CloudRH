@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Company } from 'app/_models/company'
 
 
-import { AngularFireStorage} from '@angular/fire/storage';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from 'app/_models';
@@ -15,18 +15,26 @@ import { Candidato } from 'app/_models/candidato';
 export class FirebaseService {
     constructor
         (private http: HttpClient,
-        private storage: AngularFireStorage,
-        private firestore: AngularFirestore,
-        private userCurrentService: UserCurrentService
-        ){}
+            private storage: AngularFireStorage,
+            private firestore: AngularFirestore,
+            private userCurrentService: UserCurrentService
+        ) { }
 
-    private user : User;
+    private user: User;
     private candidatoUrl = this.firestore.collection('users');
     private companyUrl = this.firestore.collection('company');
     private dataUrl = this.firestore.collection('data');
 
+    updateNewUser(userKey, value){
+        this.candidatoUrl.doc(userKey).set(value);
+    }
 
-    setNewUser( destiny: string, home: string, date: string,  transport: string, value: String){
+    deleteNewUser(userKey){
+       
+      return  this.candidatoUrl.doc(userKey).delete();
+    }
+
+    setNewUser(destiny: string, home: string, date: string, transport: string, value: String) {
         this.candidatoUrl.add({
             nameUser: this.userCurrentService.getUserName(),
             destiny: destiny,
@@ -37,112 +45,112 @@ export class FirebaseService {
         });
     }
 
-    public getAllData(){
+    public getAllData() {
         return this.dataUrl.valueChanges();
     }
-    
 
-    setUser( user : User){
+
+    setUser(user: User) {
         this.user = user;
     }
-    getUser() : User{
+    getUser(): User {
         return this.user;
     }
 
 
-    searchUser(username : string){
+    searchUser(username: string) {
 
 
-        this.getAllCandidato().subscribe( e =>{ //
-            let user = e.forEach( j => {
+        this.getAllCandidato().subscribe(e => { //
+            let user = e.forEach(j => {
                 let user = (j as unknown as User);
                 console.log(user.username + " " + username);
                 if (user.username == username)
-                    if(user.tipo == 0)
+                    if (user.tipo == 0)
                         this.user = (j as unknown as Company);
-                    else( user.tipo == 1)
-                        this.user = (j as unknown as Candidato);
+                    else (user.tipo == 1)
+                this.user = (j as unknown as Candidato);
             });
 
         });
-        this.getAllCompany().subscribe(( e =>{//
-            e.forEach( j => {
+        this.getAllCompany().subscribe((e => {//
+            e.forEach(j => {
                 let user = (j as User);
                 if (user.username == username)
-                    if(user.tipo == 0)
+                    if (user.tipo == 0)
                         this.user = (j as Company);
-                    else( user.tipo == 1)
-                        this.user = (j as Candidato);
+                    else (user.tipo == 1)
+                this.user = (j as Candidato);
             });
         }));
 
         console.log(this.user);
     }
 
-    createData(data){
+    createData(data) {
         this.dataUrl.add(data);
     }
 
 
-    getVagas(){
+    getVagas() {
 
     }
 
-    getEmpresa(){
-        
+    getEmpresa() {
+
     }
 
     //
-    createUser( candidato : Candidato){
+    createUser(candidato: Candidato) {
         //const id = this.userCurrentService.getId();
         //const completeName = this.userCurrentService.getFirstName() + ' ' + this.userCurrentService.getLastName();
         candidato.tipo = 1;
-        if(!this.verificaSenha( candidato.username , candidato.password)){
+        if (!this.verificaSenha(candidato.username, candidato.password)) {
 
             return this.candidatoUrl.add({
-                tipo : candidato.tipo,
+                tipo: candidato.tipo,
                 name: candidato.firstName,
                 username: candidato.username,
-                password : candidato.password,
-                
+                password: candidato.password,
+
             });
         }
 
     }
 
-    createCompany(company: Company){
+    createCompany(company: Company) {
         //const id = this.userCurrentService.getId();
         //const completeName = this.userCurrentService.getFirstName() + ' ' + this.userCurrentService.getLastName();
         company.tipo = 0;
-        if(!this.verificaSenha(company.username , company.password))
+        if (!this.verificaSenha(company.username, company.password))
             return this.companyUrl.add({
                 tipo: company.tipo,
-                name : company.firstName,
-                username : company.username,
-                password : company.password
+                name: company.firstName,
+                username: company.username,
+                password: company.password
             });
     }
 
-    login(username : string){
+    login(username: string) {
         this.searchUser(username);
         console.log("login user");
     }
 
 
-    
-    verificaSenha( username : string , password : string) : boolean{
+
+    verificaSenha(username: string, password: string): boolean {
 
 
-        this.getAllCompany().forEach( e =>{
-            e.forEach( j =>{
-                if( password === (j as User).password && (j as User).username === username)
+        this.getAllCompany().forEach(e => {
+            e.forEach(j => {
+                if (password === (j as User).password && (j as User).username === username)
                     return true;
             });
         });
 
-        this.getAllCandidato().forEach( e =>{
-            e.forEach( j =>{
-                if( password === (j as unknown as User).password && (j as unknown as User).username === username)
+        this.getAllCandidato().forEach(e => {
+            e.forEach(j => {
+                if (password === (j as unknown as User).password && (j as unknown as User).username === username)
                     return true;
             });
         })
@@ -152,25 +160,25 @@ export class FirebaseService {
 
 
 
-    
 
-    getAllUser(){
-      return  this.candidatoUrl.valueChanges();
+
+    getAllUser() {
+        return this.candidatoUrl.valueChanges();
     }
 
-    getAllCompany(){
+    getAllCompany() {
         return this.companyUrl.valueChanges();
     }
 
-    getAllCandidato(){
+    getAllCandidato() {
         return this.candidatoUrl.valueChanges(); // valueChanges()
     }
 
-    updateUser(id){
-        this.candidatoUrl.doc(id.payload.doc.id).set({id : 1 , name : "teste"});
+    updateUser(id) {
+        this.candidatoUrl.doc(id.payload.doc.id).set({ id: 1, name: "teste" });
     }
 
-    updateCompany(id , company : Company){
+    updateCompany(id, company: Company) {
         this.companyUrl.doc(id).set(company);
     }
 
