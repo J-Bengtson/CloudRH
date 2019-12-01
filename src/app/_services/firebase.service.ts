@@ -25,13 +25,22 @@ export class FirebaseService {
     private companyUrl = this.firestore.collection('company');
     private dataUrl = this.firestore.collection('data');
 
+    getKey(){
+
+    }
+
     updateNewUser(userKey, value){
+        console.log(value);
         this.candidatoUrl.doc(userKey).set(value);
     }
 
     deleteNewUser(userKey){
        
       return  this.candidatoUrl.doc(userKey).delete();
+    }
+
+    read_user(){
+       return this.candidatoUrl.snapshotChanges();
     }
 
     setNewUser(destiny: string, home: string, date: string, transport: string, value: String) {
@@ -57,6 +66,11 @@ export class FirebaseService {
         return this.user;
     }
 
+    getUserId(){
+        return   this.firestore.createId();
+    }
+
+   
 
     searchUser(username: string) {
 
@@ -171,7 +185,8 @@ export class FirebaseService {
     }
 
     getAllCandidato() {
-        return this.candidatoUrl.valueChanges(); // valueChanges()
+        return this.candidatoUrl.valueChanges();
+   
     }
 
     updateUser(id) {

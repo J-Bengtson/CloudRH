@@ -141,11 +141,11 @@ export class DashboardComponent implements OnInit {
 
   update(x){
     console.log(x);
+    this.firebaseService.updateNewUser(x.id,x);
   }
 
   delete(x){
-    
-    this.firebaseService.deleteNewUser(x).then(
+    this.firebaseService.deleteNewUser(x.id).then(
       e => {
         console.log(e);
       }
@@ -182,10 +182,50 @@ export class DashboardComponent implements OnInit {
   public data: Array<any> = new Array<any>();
 
 
+  public users: any;
+  public arrUser: any[] = new Array();
   ngOnInit() {
     const user = this.userCurrentService.getCurrentUser();
     this.SearchMe(user.username);
+   this.readData();
   }
+
+
+  public readData(){
+    this.firebaseService.read_user().subscribe(data => {
+ 
+      this.users = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          nameUser: e.payload.doc.data()['nameUser'],
+          Date: e.payload.doc.data()['date'],
+          Destiny: e.payload.doc.data()['destiny'],
+          Home: e.payload.doc.data()['home'],
+          Transport: e.payload.doc.data()['transport'],
+          Value: e.payload.doc.data()['value'],
+        }  
+      })
+      console.log(this.users);
+      this.arrUser = new Array();
+      console.log(this.arrUser);
+      this.users.map(
+        e =>{
+          console.log(e);
+          if(e.nameUser == this.userCurrentService.getUserName()){
+            this.arrUser.push(e);
+          }
+        }
+      )
+
+        console.log(this.arrUser);
+
+
+
+
+
+    })
+  }
+
 
 
   ///////////////////////////////////////////////////////
@@ -203,7 +243,6 @@ export class DashboardComponent implements OnInit {
   arr: UserFace[];
   SearchMe(myUserName: string) {
     this.arr = new Array();
-    console.log(this.arr);
     this.firebaseService.getAllCandidato().subscribe(
       data => {
         data.map(e => {
@@ -213,7 +252,6 @@ export class DashboardComponent implements OnInit {
         })
       }
     )
-    console.log(this.arr);
   }
 
   redirectCost(){
@@ -223,7 +261,6 @@ export class DashboardComponent implements OnInit {
   calculateRandom(): any {
     const random = Math.floor(Math.random() * 241);
     const random2 = Math.floor(Math.random() * 101);
-    console.log(random + '.' + random2);
     return random + '.' + random2;
 
   }

@@ -71,20 +71,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let x of arr || async">
-            <td> {{x.destiny}} </td>
-            <td> {{x.home}} </td>
+          <tr *ngFor="let x of arrUser || async">
+            <td> {{x.Destiny}} </td>
+            <td> {{x.Home}} </td>
             <td align="center"> 
               
-                <div *ngIf="x.transport === 'bus'">
+                <div *ngIf="x.Transport === 'bus'">
                     <mat-icon> directions_bus </mat-icon>
                 </div>
 
-                <div *ngIf="x.transport === 'airplane'">
+                <div *ngIf="x.Transport === 'airplane'">
                     <mat-icon> flight </mat-icon>
                 </div>
 
-                <div *ngIf="x.transport === 'car'">
+                <div *ngIf="x.Transport === 'car'">
                     <mat-icon> directions_cars </mat-icon>
                 </div>
 
@@ -93,9 +93,9 @@
             
 
             
-            <td> {{x.date}}</td>
+            <td> {{x.Date}}</td>
             <td style="color:red">
-              <p style="color:black">R$</p> {{x.value}}
+              <p style="color:black">R$</p> {{x.Value}}
             </td>
             <td>
               <button class="btn btn-success" (click)="update(x)">
