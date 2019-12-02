@@ -11,6 +11,19 @@ import { User } from 'app/_models';
 import { UserCurrentService } from 'app/user-current.service';
 import { Candidato } from 'app/_models/candidato';
 
+
+interface UserFace {
+    Date: string
+    Destiny: string
+    Home: string
+    nameUser: string
+    Transport: string,
+    Value: string,
+    id: string
+
+  }
+  
+
 @Injectable()
 export class FirebaseService {
     constructor
@@ -29,9 +42,31 @@ export class FirebaseService {
 
     }
 
-    updateNewUser(userKey, value){
-        console.log(value);
-        this.candidatoUrl.doc(userKey).set(value);
+    updateNewUser(userKey, value: UserFace){
+        const vl = value;
+        console.log("aaaa")
+        console.log({
+            Date: value.Date,
+            Destiny: value.Destiny,
+            Home: value.Home,
+            Transport: value.Transport,
+            nameUser: value.nameUser,
+            id: 1
+        });
+        console.log("user" +userKey);
+        this.candidatoUrl.doc(userKey).set({
+            Date: value.Date,
+            Destiny: value.Destiny,
+            Home: value.Home,
+            Transport: value.Transport,
+            nameUser: value.nameUser,
+            id: 1
+        }).then(function() {
+            console.log("Document successfully written!");
+        })
+        .catch(function(error) {
+            console.error("Error writing document: ", error);
+        });
     }
 
     deleteNewUser(userKey){
@@ -45,6 +80,7 @@ export class FirebaseService {
 
     setNewUser(destiny: string, home: string, date: string, transport: string, value: String) {
         this.candidatoUrl.add({
+            id: 0,
             nameUser: this.userCurrentService.getUserName(),
             destiny: destiny,
             home: home,
@@ -122,11 +158,12 @@ export class FirebaseService {
         if (!this.verificaSenha(candidato.username, candidato.password)) {
 
             return this.candidatoUrl.add({
-                tipo: candidato.tipo,
-                name: candidato.firstName,
+                id:'',
+                Value:'',
+                Date: '',
                 username: candidato.username,
-                password: candidato.password,
-
+                Home: '',
+                Transport: ''
             });
         }
 

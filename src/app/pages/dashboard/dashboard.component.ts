@@ -140,8 +140,9 @@ export class DashboardComponent implements OnInit {
   }
 
   update(x){
+    
     console.log(x);
-    this.firebaseService.updateNewUser(x.id,x);
+    this.firebaseService.updateNewUser(x.id , x);
   }
 
   delete(x){
@@ -255,7 +256,7 @@ export class DashboardComponent implements OnInit {
   }
 
   redirectCost(){
-    this.router.navigate(['/gastos'])
+    this.router.navigate(['gastos']);
   }
 
   calculateRandom(): any {
@@ -306,3 +307,5 @@ interface UserFace {
   transport: string,
   value: string
 }
+
+

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 
 declare interface TableData {
     headerRow: string[];
@@ -12,7 +13,32 @@ declare interface TableData {
     styleUrls: ['table.component.css']
 })
 
+
+
+
 export class TableComponent implements OnInit{
+    async chooseArchive(){
+        const { value: file } = await Swal.fire({
+            title: 'Select image',
+            input: 'file',
+            inputAttributes: {
+              accept: 'image/*',
+              'aria-label': 'Upload your profile picture'
+            }
+          })
+          
+          if (file) {
+            const reader = new FileReader()
+            reader.onload = (e) => {
+              Swal.fire({
+                title: 'Your uploaded picture'
+              
+              
+              })
+            }
+            reader.readAsDataURL(file)
+          }
+    }
     public tableData1: TableData;
     public tableData2: TableData;
     ngOnInit(){
