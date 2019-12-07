@@ -1,0 +1,68 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!--
+User Profile Sidebar by @keenthemes
+A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
+Licensed under MIT
+-->
+
+<div class="container" style="padding-left: 0">
+    <div class="row profile">
+		<div class="col-md-3" style="padding-left: 0">
+			<app-menu-empresa [ativaVagasDisponiveis]= true ></app-menu-empresa>
+    </div>
+		<div class="col-md-9 border-left"> 
+      <br>
+      <div class="row">
+          <div class="col-sm-10"><p class="h3">Suas Vagas:</p></div>
+          <div class="col-sm-2"><button [routerLink]="['/cadastra-vaga']" class="ui secondary button">
+            Cadastrar Vagas
+          </button></div>
+      </div>
+      
+        <br>
+        <div class="row">
+      <div class="profile-content col-md-6">
+          <div class="ui card">
+              <div class="image">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYhBJujeCRiWInfFWv_0fSfLzEf6X1LFTTbH2_Z7llbmwJroRe&s">
+              </div>
+              <div class="content" align="center">
+                <a class="header">Sinqia</a>
+                <div class="meta">
+                  <span class="date">Vaga disponível desde de 09/09/2019</span>
+                </div>
+                <div class="description">
+                 Precisamos de pessoas que possuem boas habilidades com C#!
+                </div> <br>
+                <button class="ui secondary button" [routerLink]="['/visualiza-vaga']">
+                    Visualizar
+                  </button>
+              </div>
+            </div>
+        <div  *ngFor="let vaga of vagas">
+              <div class="ui card">
+                <div class="image">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYhBJujeCRiWInfFWv_0fSfLzEf6X1LFTTbH2_Z7llbmwJroRe&s">
+                </div>
+                <div class="content">
+                  <a class="header">{{vaga.empresa.nome}}</a>
+                  <div class="meta">
+                    <span class="date">Vaga disponível desde de {{vaga.dataAbertura}}</span>
+                  </div>
+                  <div class="description">
+                   {{vaga.descricao}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+		</div>
+	</div>
+</div>

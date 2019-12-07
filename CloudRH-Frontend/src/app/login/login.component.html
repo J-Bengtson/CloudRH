@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<body>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+              <div class="card card-signin my-5">
+                <div class="card-body">
+                    <div align="center">
+                    <img src="../../assets/img/cloudrh2.png" width="350em">
+                    <div align="center"><h1>For Business</h1></div>
+<hr>
+                </div>
+                <br>
+                  <form class="form-signin" style="padding-bottom: 10em">                    
+                    <div class="form-label-group">
+                      Email:
+                      <input [(ngModel)]="Login.email" [ngModelOptions]="{standalone: true}" type="email" id="inputEmail" class="form-control" placeholder="Digite seu Email" required autofocus>
+                      <label for="inputEmail"></label>
+                    </div>
+      
+                    <div class="form-label-group">
+                      Senha:
+                      <input [(ngModel)]="Login.senha" [ngModelOptions]="{standalone: true}" type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
+                      <label for="inputPassword"></label>
+                    </div>
+                   <a><button class="btn btn-lg btn-primary btn-block text-uppercase" style="background-color:#70D1F9; border-color: #70D1F9" type="submit" (click)="ValidaLogin()">Acessar</button></a>
+                    <hr class="my-4"> 
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </body>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!--
+    User Profile Sidebar by @keenthemes
+    A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
+    Licensed under MIT
+-->
+
+<div class="container" style="padding-left: 0">
+    <div class="row profile">
+        <div class="col-md-3" style="padding-left: 0">
+            <app-menu-empresa [ativaVagasDisponiveis]= "true"></app-menu-empresa>
+        </div>
+        <div class="col-md-9 row">
+            <div>
+                <img style="width: 100%" src="https://www.sinqia.com.br/wp-content/themes/mziq_sinqia_insti/img/logotipo-laranja.png">           
+            </div>
+            <div>
+                <h3><strong>Conheça a {{vaga.empresa}}!</strong></h3>
+            </div>
+            <div>
+                <p>{{vaga.descricao}}</p> <br>
+            </div>            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-9">
+            <div>
+                <h4><strong>Salário: </strong> R{{vaga.valor || currency}}</h4>
+            </div>
+            <div>
+                <h4><strong>Benefícios</strong> {{vaga.beneficios}}</h4>
+            </div>
+            <div>
+                <h4><strong>Tempo de trabalho: </strong> {{vaga.jornada}} hrs</h4>
+            </div>
+            <div>
+                <h4><strong>Turno</strong> {{vaga.turno}}</h4>
+            </div>
+            <div>
+                <h4><strong>Nível: </strong> {{vaga.situacao}}</h4>
+            </div>
+            <div align="right">
+                <button class="ui primary button">
+                    Enviar Currículo!
+                </button>
+            </div>
+            <hr>
+            <hr>
+            <h1>Usuários Interessados: </h1>
+            <br>
+            <div class="row">
+          <div class="profile-content col-md-6">
+              <div class="ui card">
+                  <div class="image">
+                    <img src="">
+                  </div>
+                  <div class="content" align="center">
+                    <a class="header">Shulambs Extreme</a>
+                    <div class="meta">
+                      <span class="date"></span>
+                    </div>
+                    <div class="description">
+                        Desenvolvedor C#, sou o melhor no que eu faço.
+                        Atualmente desempregado
+                    </div> <br>
+                    <button class="ui secondary button" [routerLink]="['/visualiza-vaga']">
+                        Escolher
+                      </button>
+                  </div>
+                </div>
+            <div  *ngFor="let vaga of vagas">
+                  <div class="ui card">
+                    <div class="image">
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYhBJujeCRiWInfFWv_0fSfLzEf6X1LFTTbH2_Z7llbmwJroRe&s">
+                    </div>
+                    <div class="content">
+                      <a class="header">{{vaga.empresa.nome}}</a>
+                      <div class="meta">
+                        <span class="date">Vaga disponível desde de {{vaga.dataAbertura}}</span>
+                      </div>
+                      <div class="description">
+                       {{vaga.descricao}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>  

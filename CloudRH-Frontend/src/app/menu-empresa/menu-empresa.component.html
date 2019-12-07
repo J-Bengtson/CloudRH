@@ -1,0 +1,33 @@
+<div class="profile-sidebar">
+    <!-- SIDEBAR USERPIC -->
+    <div class="profile-userpic">
+        <img src="https://media.licdn.com/dms/image/C4D0BAQF-XOConDJGOg/company-logo_200_200/0?e=2159024400&v=beta&t=6ho6MXL4mpM3wxu126s1XWspAYn9ozc_REEC2dnmxag" class="img-responsive" alt="">
+    </div>
+    <!-- END SIDEBAR USERPIC -->
+    <!-- SIDEBAR USER TITLE -->
+    <div class="profile-usertitle">
+        <div class="profile-usertitle-name">
+            {{candidato.nome}}
+        </div>
+        <div class="profile-usertitle-job">
+            Business
+        </div>
+    </div>
+    <!-- END SIDEBAR USER TITLE -->
+    <!-- SIDEBAR MENU -->
+    <div class="profile-usermenu">
+        <ul class="nav">
+            <li [ngClass]=" ativaVagasDisponiveis ? 'active' : ''">
+                <a [routerLink]="['/home-empresa']">
+                <i class="glyphicon glyphicon-home"></i>
+                Vagas Abertas </a>
+            </li>
+            <li [ngClass]=" ativaConfiguracaoUsuario ? 'active' : ''">
+                <a [routerLink]="['/configuracoes-usuario']">
+                <i class="glyphicon glyphicon-user"></i>
+                Configurações de Usuário </a>
+            </li>
+        </ul>
+    </div>
+    <!-- END MENU -->
+</div>

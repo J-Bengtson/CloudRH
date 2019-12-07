@@ -1,0 +1,140 @@
+<div style="position: fixed; top: 0; left: 0;" *ngIf="nivelRegistro == NivelRegistroEnum.dadosPessoais">
+    <div class="row" style="width: 100%">
+        <div class="col-md-4">
+            <div class="container-fluid">
+                <div align="center" style="padding-top: 4em;">
+                    <h4 style="font-size: 1.5rem;">Criar Uma Conta</h4>
+                </div>
+                <hr>
+                <a href="" class="btn btn-block btn-twitter"> <i class="fa">&#xf099;</i> Cadastrar-se via Twitter</a>
+                <a href="" class="btn btn-block btn-google"> <i class="fa">&#xf1a0;</i>   Cadastrar-se via Google</a>
+                <p class="divider-text">
+                    <span style="background-color: #ffffff">OU</span>
+                </p>
+                <div class="wrap">
+                    <label class="mat-label">CPF:</label>
+                    <div class="mat-div">
+                        <input type="text" class="mat-input" placeholder=" CPF" [(ngModel)]="candidato.cpf">
+                    </div>
+                    <label class="mat-label">Nome:</label>
+                    <div class="mat-div">
+                        <input type="text" class="mat-input" placeholder=" Nome" [(ngModel)]="candidato.nome">
+                    </div>
+                    <label class="mat-label">Gênero:</label>
+                    <div style="padding-top: 3em; padding-bottom: 5em">
+                        <div class="b-select-wrap">
+                            <select class="form-control b-select" [(ngModel)]="candidato.genero">
+                                <option value="Masculino">Masculino</option>
+                                <option value="Feminino">Feminino</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <a class="btn btn-block btn-CloudRH" (click)="Continuar(1)">Continuar </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8" style="padding-right: 35em">
+            <img src="../../assets/img/Imagem7.png" width="1200em">
+        </div>
+    </div>
+</div>
+
+<div style="position: fixed; top: 0; left: 0;" *ngIf="nivelRegistro == NivelRegistroEnum.dadosContato">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="container-fluid">
+                <div align="center" style="padding-top: 4em;">
+                    <h4 style="font-size: 1.5rem;">Quase lá, cadastre seus contatos...</h4>
+                </div>
+                <div class="wrap">
+                    <label class="mat-label">Numero do celular:</label>
+                    <div class="mat-div">
+                        <input type="text" class="mat-input" placeholder=" Celular" [(ngModel)]="candidato.Contato.telefone1">
+                    </div>
+                    <label class="mat-label">Numero do telefone residencial:</label>
+                    <div class="mat-div">
+                        <input type="text" class="mat-input" placeholder=" Telefone" [(ngModel)]="candidato.Contato.telefone2"> 
+                    </div>
+                    <label class="mat-label">Digite sue email:</label>
+                    <div class="mat-div">
+                        <input type="text" class="mat-input" id="telefone" placeholder=" Email" [(ngModel)]="candidato.Contato.email">
+                    </div> 
+                    <br><br>
+                    <a class="btn btn-block btn-CloudRH" (click)="Continuar(2)">Continuar </a>
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-md-8" style="padding-right: 35em">
+            <img src="../../assets/img/Imagem7.png" width="1200em">
+        </div>
+    </div>
+</div>
+<div style="position: fixed; top: 0; left: 0;" *ngIf="nivelRegistro == NivelRegistroEnum.dadosEndereco">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="container-fluid">
+                <div align="center" style="padding-top: 4em;">
+                    <h4 style="font-size: 1.5rem;">Por último, cadastre seu endereço.</h4>
+                </div>
+                <div class="wrap" >
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label class="mat-label">CEP:</label>
+                            <div class="mat-div">
+                                <input type="text" class="mat-input" placeholder=" CEP" [(ngModel)]="candidato.Endereco.cep">
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <label class="mat-label">Nome da Rua:</label>
+                            <div class="mat-div">
+                                <input type="text" class="mat-input" placeholder=" Rua" [(ngModel)]="candidato.Endereco.logradouro">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        
+                        <div class="col-sm-2">
+                            <label class="mat-label">UF:</label>
+                            <div class="mat-div">
+                                <input type="text" class="mat-input" placeholder=" UF" [(ngModel)]="candidato.Endereco.uf">
+                            </div>
+                        </div>
+                        <div class="col-sm-10">
+                            <label class="mat-label">Cidade:</label>
+                            <div class="mat-div">
+                                <input type="text" class="mat-input" placeholder=" Cidade" [(ngModel)]="candidato.Endereco.cidade">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        
+                        <div class="col-sm-6">
+                            <label class="mat-label">Bairro:</label>
+                            <div class="mat-div">
+                                <input type="text" class="mat-input" placeholder=" Bairro" [(ngModel)]="candidato.Endereco.bairro">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="mat-label">Número:</label>
+                            <div class="mat-div">
+                                <input type="text" class="mat-input" placeholder=" Número" [(ngModel)]="candidato.Endereco.numero">
+                            </div>
+                        </div>
+                    </div>
+                    <label class="mat-label">Complemento:</label>
+                    <div class="mat-div">
+                        <input type="text" class="mat-input" placeholder=" Complemento" [(ngModel)]="candidato.Endereco.complemento">
+                    </div>
+                    <br> <br>
+                    <a class="btn btn-block btn-CloudRH" (click)="Continuar(3)" [routerLink]="['']" routerLinkActive="router-link-active" >Cadastrar-se </a>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8" style="padding-right: 35em">
+            <img src="../../assets/img/Imagem7.png" width="1200em">
+        </div>
+    </div>
+</div>

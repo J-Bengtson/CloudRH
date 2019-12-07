@@ -1,0 +1,80 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!--
+User Profile Sidebar by @keenthemes
+A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
+Licensed under MIT
+-->
+
+<div class="container" style="padding-left: 0">
+    <div class="row profile">
+		<div class="col-md-3" style="padding-left: 0">
+			<div class="profile-sidebar">
+				<!-- SIDEBAR USERPIC -->
+				<div class="profile-userpic">
+					<img src="https://www.adamsilva.com.br/wp-content/uploads/2017/03/desenvolvedor-wordpress.jpg" class="img-responsive" alt="">
+				</div>
+				<!-- END SIDEBAR USERPIC -->
+				<!-- SIDEBAR USER TITLE -->
+				<div class="profile-usertitle">
+					<div class="profile-usertitle-name">
+						Lucas Trivela
+					</div>
+					<div class="profile-usertitle-job">
+						Developer
+					</div>
+				</div>
+				<!-- END SIDEBAR USER TITLE -->
+				<!-- SIDEBAR MENU -->
+				<div class="profile-usermenu">
+					<ul class="nav">
+						<li class="active">
+							<a href="#">
+							<i class="glyphicon glyphicon-home"></i>
+							Vagas Disponíveis </a>
+						</li>
+						<li>
+							<a href="#">
+							<i class="glyphicon glyphicon-user"></i>
+							Configurações de Usuário </a>
+						</li>
+						<li>
+							<a href="#" target="_blank">
+							<i class="glyphicon glyphicon-ok"></i>
+							Match de Vagas </a>
+						</li>
+						<li>
+							<a href="#">
+							<i class="glyphicon glyphicon-flag"></i>
+							Ajuda </a>
+						</li>
+					</ul>
+				</div>
+				<!-- END MENU -->
+			</div>
+		</div>
+		<div class="col-md-9 border-left">
+            <div class="profile-content" *ngFor="let vaga of vagas">
+              <div class="ui card">
+                <div class="image">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYhBJujeCRiWInfFWv_0fSfLzEf6X1LFTTbH2_Z7llbmwJroRe&s">
+                </div>
+                <div class="content">
+                  <a class="header">{{vaga.empresa}}</a>
+                  <div class="meta">
+                    <span class="date">Vaga disponível desde de {{vaga.dataAbertura}}</span>
+                  </div>
+                  <div class="description">
+                   {{vaga.descricao}}
+                  </div>
+                </div>
+              </div>
+            </div>
+		</div>
+	</div>
+</div>
